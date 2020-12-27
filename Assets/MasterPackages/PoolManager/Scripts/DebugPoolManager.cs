@@ -6,6 +6,7 @@ public class DebugPoolManager : MonoBehaviour
 {
     [SerializeField] PoolManager pool = null;
     [SerializeField] GenericPoolableObject poolable = null;
+    [SerializeField] [SerializeInterface(typeof(IPoolable))] GameObject test;
 
     private void Awake()
     {

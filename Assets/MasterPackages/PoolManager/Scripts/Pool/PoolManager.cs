@@ -7,8 +7,8 @@ using UnityEngine;
 public class PoolManager : ScriptableObject
 {
     [SerializeField] int nObj = 10;
-    [SerializeField] [HideInInspector] GameObject serializePoolable = null;
-    [SerializeField] IPoolable poolablePrefab;
+    [SerializeField] [SerializeInterface(typeof(IPoolable))] GameObject serializePoolable = null;
+    IPoolable poolablePrefab;
     PoolableContainer[] poolables;
     bool spawned;
 

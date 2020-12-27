@@ -53,7 +53,7 @@ public class ViewTriggerFromTransform : MonoBehaviour
         {
             if (CheckTrigger() && !inside)
                 InvokeEnterEvent(objTransform);
-            else if ((!CheckDistance(objTransform) || !CheckAngle(objTransform)) && inside)
+            else if (!CheckTrigger() && inside)
                 InvokeExitEvent(objTransform);
         }
     }
