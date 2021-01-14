@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/MasterPackages/PoolManager/Exemples/PoolTest.unity
+    guid: 8671a64dde7a21a46a8eb7cf53646e0d
+  - enabled: 1
+    path: Assets/MasterPackages/PoolManager/Exemples/PoolTest 1.unity
+    guid: 6b09982165e2c764991c870567f34789
   m_configObjects: {}
