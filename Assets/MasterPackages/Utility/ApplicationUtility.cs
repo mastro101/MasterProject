@@ -21,7 +21,7 @@ public class ApplicationUtility : Singleton<ApplicationUtility>
         isQuitting = false;
         isChangeScene = false;
         SceneNavigation.OnChangeScene += OnChangeScene;
-        SceneManager.sceneLoaded += instance.SceneManager_sceneLoaded;
+        SceneManager.sceneLoaded += GetInstance().SceneManager_sceneLoaded;
         SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
         return this;
     }
@@ -50,23 +50,23 @@ public class ApplicationUtility : Singleton<ApplicationUtility>
     private void OnApplicationQuit()
     {
         isQuitting = true;
-        instance.OnApplicationQuitEvent?.Invoke();
+        GetInstance().OnApplicationQuitEvent?.Invoke();
     }
 
     private void OnApplicationFocus(bool focus)
     {
         if (focus)
-            instance.OnApplicationStartFocusEvent?.Invoke();
+            GetInstance().OnApplicationStartFocusEvent?.Invoke();
         else
-            instance.OnApplicationEndFocusEvent?.Invoke();
+            GetInstance().OnApplicationEndFocusEvent?.Invoke();
     }
 
     private void OnApplicationPause(bool pause)
     {
         if (pause)
-            instance.OnApplicationStartPauseEvent?.Invoke();
+            GetInstance().OnApplicationStartPauseEvent?.Invoke();
         else
-            instance.OnApplicationEndPauseEvent?.Invoke();
+            GetInstance().OnApplicationEndPauseEvent?.Invoke();
     }
 
     public static bool IsQuitting()
@@ -80,7 +80,8 @@ public class ApplicationUtility : Singleton<ApplicationUtility>
         {
             return null;
         }
-        GetInstance();
+        if (!instance)
+            new GameObject(typeof(ApplicationUtility).Name, typeof(ApplicationUtility));
         return Instantiate(_gameObject, pos, rot, parent);
     }
 }

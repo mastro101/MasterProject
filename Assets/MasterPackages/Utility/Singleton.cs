@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
-    protected static T instance;
+    protected static T instance { get; private set; }
 
     protected virtual void Awake()
     {
@@ -18,12 +18,12 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
             Destroy(this.gameObject);
     }
 
-    public static T GetInstance()
+    public T GetInstance()
     {
         if (instance == null)
         {
             if (!ApplicationUtility.IsQuitting())
-                return instance = InstantiateSingleton(typeof(T));
+                InstantiateSingleton(typeof(T));
         }
 
         return instance;
@@ -31,13 +31,11 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
 
     protected abstract T Setup();
 
-    private static T InstantiateSingleton(System.Type t)
+    private void InstantiateSingleton(System.Type t)
     {
         if (instance == null)
         {
-            GameObject go = new GameObject(t.Name, t);
+            Instantiate(this);
         }
-
-        return instance;
     }
 }
